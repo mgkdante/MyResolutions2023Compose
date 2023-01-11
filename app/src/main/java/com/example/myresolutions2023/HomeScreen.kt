@@ -29,7 +29,6 @@ fun ResolutionList(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
             .background(MaterialTheme.colorScheme.background)
-            .fillMaxWidth(),
     ) {
         items(Resolutions.resolutions) {
             ResolutionItem(resolution = it)
@@ -40,13 +39,13 @@ fun ResolutionList(modifier: Modifier = Modifier) {
 @Composable
 fun ResolutionItem(
     modifier: Modifier = Modifier,
-    resolution: Resolution
+    resolution: Resolution,
 ) {
     var expanded by remember { mutableStateOf(false) }
     Card(
         modifier = modifier
             .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
