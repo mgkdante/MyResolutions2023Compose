@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Resolutions for 2023</string>
+    <string name="app_name">My Resolutions</string>
     <string name="goal1">Run a marathon!</string>
     <string name="goal2">Become a professional app developer</string>
     <string name="goal3">Learn Android Dev</string>

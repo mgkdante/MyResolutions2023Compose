@@ -1,5 +1,6 @@
 package com.example.myresolutions2023
 
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
@@ -16,13 +17,60 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myresolutions2023.model.Resolution
 import com.example.myresolutions2023.model.Resolutions
+import com.example.myresolutions2023.ui.theme.MyResolutions2023Theme
 import com.example.myresolutions2023.ui.theme.Shapes
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ResolutionApp() {
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState()
+    )
+    Scaffold(
+        topBar = {
+            ResolutionTopAppBar(scrollBehavior = scrollBehavior)
+        },
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    )
+    { padding ->
+        ResolutionList(modifier = Modifier.padding(padding))
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ResolutionTopAppBar(scrollBehavior: TopAppBarScrollBehavior) {
+    LargeTopAppBar(
+        title = {
+            Text(
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.headlineLarge
+            )
+        },
+        modifier = Modifier.animateContentSize(
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessLow
+            )
+        ),
+        scrollBehavior = scrollBehavior,
+        colors = TopAppBarDefaults.largeTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.background,
+            scrolledContainerColor = MaterialTheme.colorScheme.background
+        )
+    )
+
+}
 
 @Composable
 fun ResolutionList(modifier: Modifier = Modifier) {
@@ -62,7 +110,7 @@ fun ResolutionItem(
             ResolutionImage(
                 image = resolution.resolutionImage,
                 description = stringResource(id = R.string.imageDescription),
-                onClickImage = { expanded = !expanded},
+                onClickImage = { expanded = !expanded },
             )
             if (expanded) {
                 ResolutionDescription(description = resolution.resolution)
@@ -106,4 +154,19 @@ fun ResolutionDescription(@StringRes description: Int, modifier: Modifier = Modi
         modifier = modifier.padding(8.dp),
         textAlign = TextAlign.Center
     )
+}
+
+
+@Preview(name = "Light Mode", showBackground = true, showSystemUi = true)
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    showSystemUi = true
+)
+@Composable
+fun ResolutionsPreview() {
+    MyResolutions2023Theme {
+        ResolutionApp()
+    }
 }
