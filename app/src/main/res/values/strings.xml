@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">My Resolutions for 2023</string>
+    <string name="goal1">Run a marathon!</string>
+    <string name="goal2">Become a professional app developer</string>
+    <string name="goal3">Learn Android Dev</string>
+    <string name="goal4">Learn iOS Dev</string>
+    <string name="goal5">Move to montreal</string>
+    <string name="goal6">Sell my first app</string>
+
+    <string name="number1">Resolution #1</string>
+    <string name="number2">Resolution #2</string>
+    <string name="number3">Resolution #3</string>
+    <string name="number4">Resolution #4</string>
+    <string name="number5">Resolution #5</string>
+    <string name="number6">Resolution #6</string>
+
+    <string name="imageDescription">ResolutionImage</string>
+
+</resources>
